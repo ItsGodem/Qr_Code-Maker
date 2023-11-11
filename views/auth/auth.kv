@@ -1,0 +1,113 @@
+<Auth>:
+    BoxLayout: 
+        orientation:'vertical'
+        BoxLayout:
+            size_hint_y:.2
+            padding:[dp(100),dp(170),dp(100),dp(10)]
+            BackBox:
+                bcolor:app.color_secondary_bg
+                width:dp(200)
+                radius:[self.height*.1]
+                FlatField:
+                    id: text_qr
+                    hint_text:'write any text to convert to qrcode'
+                    font_size:app.fonts.size.h2
+        BoxLayout:
+            orientation:'vertical'
+            size_hint_y:.2
+            padding:[dp(100),dp(0),dp(100),dp(80)]
+            RoundedButton:
+                text:'convert'
+                radius:[self.height*.1]
+                bcolor:app.color_primary
+                font_size:app.fonts.size.h1
+                on_release: root.convert()
+            FlatButton:
+                text:'reset'
+                radius:[self.height*.1]
+                bcolor:app.color_primary
+                font_size:app.fonts.size.h1
+                on_release: root.reset()
+        
+        BoxLayout:
+            size_hint_y:.1
+        BoxLayout:
+            size_hint_y:.1
+    Drivider:     
+    BoxLayout:
+        orientation : "vertical"
+        BoxLayout:
+        AnchorLayout:
+            anchor_x:'center'
+            BackBox:
+                size_hint_y: None 
+                size_hint_x: None
+                width:dp(550)
+                height:dp(550)
+                canvas.before:
+                    Color:
+                        rgba: app.color_secondary_bg
+                    RoundedRectangle:
+                        pos:self.pos
+                        size: self.size
+                        source:root.qrpath
+        BackBox:
+            padding:[dp(100),dp(170),dp(100),dp(10)]
+            RoundedButton:
+                text:'Save'
+                width:dp(200)
+                radius:[self.height*.1]
+                bcolor:app.color_primary
+                font_size:app.fonts.size.extra
+                on_release: root.save()
+<Drivider@Widget>:
+    size_hint_x: None 
+    width:dp(1.2)
+    canvas.before:
+        Color:
+            rgba: app.color_secondary_bg
+        Rectangle:
+            pos:self.pos
+            size: self.size
+<Savefile>:
+
+	background: ''
+	background_color: [0,0,0,0]
+	
+	AnchorLayout:
+		anchor_x: 'center'
+        BackBox:
+            orientation:'vertical'
+			spacing: dp(24)
+			size_hint_x: .7
+            size_hint_y:.7
+			bcolor: app.color_primary_bg        
+            FileChooserIconView:
+                id:file
+                on_selection: root.select(args)
+            BackBox:
+                size_hint_y:.1
+                BackBox:
+                    padding:[dp(100),0]   
+                    RoundedButton:
+                        text:'Save'
+                        width:dp(200)
+                        size_hint_y:1
+                        size_hint_x:.5
+                        radius:[self.height*.1]
+                        bcolor:app.color_primary
+                        font_size:app.fonts.size.extra
+                        on_release: root.save(root.ids.file.path)
+                        on_release: root.dismiss()
+                
+                BackBox:
+                    padding:[dp(100),0]    
+                    RoundedButton:
+                        text:'Exit'
+                        width:dp(200)
+                        size_hint_y:1
+                        size_hint_x:.5
+                        radius:[self.height*.1]
+                        bcolor:app.color_tertiary
+                        font_size:app.fonts.size.extra
+                        on_release: root.dismiss()

@@ -1,0 +1,29 @@
+#: import BackBox widgets.box.BackBox
+#: import Text widgets.labels.Text
+#: import FlatField widgets.textfields.FlatField
+#: import SearchBar widgets.textfields.SearchBar
+#: import FlatButton widgets.buttons.FlatButton
+#: import RoundedButton widgets.buttons.RoundedButton
+
+
+
+#: import Auth views.auth.Auth
+
+#: import icon widgets.iconfonts.icon
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+<MainWindow>:
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgba: app.color_primary_bg
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    ScreenManager:
+        id: scrn_mngr
+        transition: FadeTransition()
+        Screen:
+            name: 'scrn_auth'
+            Auth:
+                id: auth
+        
